@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B1C2D"/>
+      <stop offset="100%" stop-color="#14283E"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Container -->
+  <rect x="4" y="4" width="120" height="120" rx="28" fill="url(#bg)" stroke="#1F6FFF" stroke-width="2"/>
+  
+  <!-- P Letter -->
+  <path d="M42 36 V92 M42 36 H66 C84 36 84 72 66 72 H42" stroke="#F5F7FA" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- + Sign (Accent) -->
+  <line x1="88" y1="58" x2="88" y2="86" stroke="#1F6FFF" stroke-width="8" stroke-linecap="round"/>
+  <line x1="74" y1="72" x2="102" y2="72" stroke="#1F6FFF" stroke-width="8" stroke-linecap="round"/>
+</svg>

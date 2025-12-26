@@ -1,0 +1,57 @@
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #0B1C2D;
+}
+::-webkit-scrollbar-thumb {
+    background: #334e68;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #1F6FFF;
+}
+
+/* Custom Scrollbar for Dropdowns within the app */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* Grid Pattern Background */
+.bg-grid-pattern {
+    background-size: 60px 60px;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Grid Fade Animation */
+@keyframes fade-grid {
+    0% { opacity: 0.4; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.95); }
+}
+
+.animate-grid-fade {
+    animation: fade-grid 1.5s ease-out forwards;
+}
+
+/* Utility Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.animate-in {
+    animation: fadeIn 0.2s ease-out forwards;
+}

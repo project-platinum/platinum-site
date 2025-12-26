@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Platinum+ Optimizer - Ottimizzazione Reale</title>
+    <link rel="icon" href="https://ik.imagekit.io/xsc5vax29/Logo%20Platinum%20Optimizer%201.png" />
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Lucide Icons (Vanilla Version) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              platinum: { 900: '#0B1C2D', 950: '#050a0f', 50: '#F5F7FA', 300: '#BFC7D5' },
+              electric: { 500: '#1F6FFF', 600: '#165bc0' }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+            backgroundImage: {
+              'hero-pattern': "radial-gradient(circle at 50% 0%, rgba(31, 111, 255, 0.08) 0%, rgba(11, 28, 45, 0) 50%)",
+            }
+          }
+        }
+      }
+    </script>
+<script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "vite": "https://esm.sh/vite@^7.3.0",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+  }
+}
+</script>
+</head>
+<body class="bg-platinum-900 text-platinum-50 antialiased font-sans selection:bg-electric-500 selection:text-white overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent py-6">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between">
+            <div class="text-xl md:text-2xl font-serif font-bold tracking-tight text-white flex items-center gap-3">
+                <img src="https://ik.imagekit.io/xsc5vax29/Logo%20Platinum%20Optimizer%201.png" alt="Platinum+ Logo" class="h-8 md:h-10 w-auto object-contain" />
+                <span class="truncate">Platinum+ Optimizer</span>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-6 text-sm font-medium text-platinum-300">
+                <button onclick="scrollToSection('features')" class="hover:text-white transition-colors" data-i18n="nav.about">About</button>
+                <button onclick="scrollToSection('target')" class="hover:text-white transition-colors" data-i18n="nav.target">Target</button>
+                <button onclick="scrollToSection('activation')" class="hover:text-white transition-colors" data-i18n="nav.howItWorks">Guide</button>
+                <button onclick="scrollToSection('faq')" class="hover:text-white transition-colors" data-i18n="nav.faq">FAQ</button>
+                
+                <div class="h-4 w-[1px] bg-platinum-300/20 mx-2"></div>
+                
+                <!-- Language Selector Desktop -->
+                <div class="relative group" id="lang-selector-desktop">
+                    <button class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-platinum-300/20 text-platinum-300 hover:border-platinum-300/50 hover:text-white transition-all duration-300">
+                        <span class="text-base" id="current-flag-desktop">🇬🇧</span>
+                        <span class="text-xs font-medium tracking-wide" id="current-lang-name-desktop">EN</span>
+                    </button>
+                    <!-- Dropdown -->
+                    <div class="absolute top-full right-0 mt-2 w-64 bg-[#0B1C2D] border border-platinum-300/10 shadow-2xl rounded-sm py-2 hidden group-hover:block z-50">
+                        <div class="px-4 py-2 text-xs font-semibold text-platinum-300/40 uppercase tracking-wider border-b border-platinum-300/5 mb-1">Select Language</div>
+                        <button onclick="changeLanguage('en')" class="w-full text-left px-4 py-2 text-sm text-platinum-300 hover:bg-white/5 hover:text-white flex items-center gap-3">
+                            <span class="text-lg">🇬🇧</span> English
+                        </button>
+                        <button onclick="changeLanguage('it')" class="w-full text-left px-4 py-2 text-sm text-platinum-300 hover:bg-white/5 hover:text-white flex items-center gap-3">
+                            <span class="text-lg">🇮🇹</span> Italiano
+                        </button>
+                        <button onclick="changeLanguage('ru')" class="w-full text-left px-4 py-2 text-sm text-platinum-300 hover:bg-white/5 hover:text-white flex items-center gap-3">
+                            <span class="text-lg">🇷🇺</span> Русский
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white p-2" id="mobile-menu-btn">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-platinum-900 border-b border-platinum-300/10 p-6 flex flex-col space-y-4 shadow-2xl max-h-[80vh] overflow-y-auto">
+            <button onclick="scrollToSection('features')" class="text-left py-2 text-platinum-300 hover:text-white" data-i18n="nav.about">About</button>
+            <button onclick="scrollToSection('target')" class="text-left py-2 text-platinum-300 hover:text-white" data-i18n="nav.target">Target</button>
+            <button onclick="scrollToSection('activation')" class="text-left py-2 text-platinum-300 hover:text-white" data-i18n="nav.howItWorks">Guide</button>
+            
+            <div class="w-full border-t border-platinum-300/10 pt-4 mt-2">
+                <div class="text-xs font-semibold text-platinum-300/50 mb-2 uppercase tracking-wider">Select Language</div>
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="changeLanguage('en')" class="flex items-center gap-2 px-3 py-2 rounded-sm text-sm bg-platinum-900 text-platinum-300 border border-transparent hover:bg-platinum-800">🇬🇧 English</button>
+                    <button onclick="changeLanguage('it')" class="flex items-center gap-2 px-3 py-2 rounded-sm text-sm bg-platinum-900 text-platinum-300 border border-transparent hover:bg-platinum-800">🇮🇹 Italiano</button>
+                    <button onclick="changeLanguage('ru')" class="flex items-center gap-2 px-3 py-2 rounded-sm text-sm bg-platinum-900 text-platinum-300 border border-transparent hover:bg-platinum-800">🇷🇺 Русский</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div id="hero-container" class="relative pt-32 pb-16 md:pt-48 md:pb-32 overflow-hidden px-4 bg-[#050a0f]">
+        <!-- Technical Grid Background -->
+        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <div class="absolute inset-0 bg-grid-pattern [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)]"></div>
+            <!-- Grid blocks will be injected here by JS -->
+            <div id="grid-blocks-container"></div>
+            <div class="absolute top-[20%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-electric-500/10 blur-[100px] rounded-full pointer-events-none"></div>
+        </div>
+
+        <div class="max-w-[1440px] mx-auto px-2 md:px-6 relative z-10 pointer-events-none">
+            <div class="pointer-events-auto grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr_1.2fr] gap-8 items-center">
+                
+                <!-- Left Image -->
+                <div class="order-2 lg:order-1 relative group w-full max-w-lg mx-auto lg:max-w-none">
+                    <div class="text-center mb-4 text-electric-500 font-medium tracking-wide text-xs md:text-sm uppercase" data-i18n="hero.imageLabelLeft">Interface</div>
+                    <div class="absolute -inset-1 bg-gradient-to-r from-electric-500 to-purple-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative rounded-xl overflow-hidden border border-platinum-300/10 shadow-2xl bg-[#0B1522]">
+                        <img src="https://ik.imagekit.io/xsc5vax29/Screenshot_80_upscayl_4x_upscayl-standard-4x.png" alt="Interface" class="w-full h-auto object-cover transform transition-transform duration-500 group-hover:scale-[1.02]">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none"></div>
+                    </div>
+                </div>
+
+                <!-- Center Text -->
+                <div class="order-1 lg:order-2 text-center">
+                    <h1 class="font-serif text-4xl sm:text-5xl md:text-5xl xl:text-7xl font-semibold leading-tight mb-6 md:mb-8 text-platinum-50 tracking-tight drop-shadow-lg" data-i18n="hero.headline">
+                        Real Optimization.
+                    </h1>
+                    <p class="text-base md:text-xl text-platinum-300 mb-8 md:mb-12 leading-relaxed font-light" data-i18n="hero.subheadline">
+                        Advanced Kernel optimization system.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <button onclick="handleDownload()" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium rounded-sm bg-electric-500 text-white hover:bg-electric-600 shadow-lg shadow-electric-500/20 transition-all duration-300">
+                            <i data-lucide="download" class="mr-2 w-5 h-5"></i>
+                            <span data-i18n="hero.ctaDownloadExe">Download</span>
+                        </button>
+                    </div>
+                    <div class="mt-8 flex justify-center">
+                        <button onclick="scrollToSection('features')" class="text-platinum-300 hover:text-white text-sm flex items-center gap-1 transition-colors">
+                            <span data-i18n="hero.ctaLearn">Learn More</span> <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Image -->
+                <div class="order-3 lg:order-3 relative group w-full max-w-lg mx-auto lg:max-w-none">
+                    <div class="text-center mb-4 text-electric-500 font-medium tracking-wide text-xs md:text-sm uppercase" data-i18n="hero.imageLabelRight">Results</div>
+                    <div class="absolute -inset-1 bg-gradient-to-l from-electric-500 to-purple-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative rounded-xl overflow-hidden border border-platinum-300/10 shadow-2xl bg-[#0B1522]">
+                        <img src="https://ik.imagekit.io/xsc5vax29/0WITFpN.png" alt="Results" class="w-full h-auto object-cover transform transition-transform duration-500 group-hover:scale-[1.02]">
+                        <div class="absolute inset-0 bg-gradient-to-tl from-white/5 to-transparent pointer-events-none"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- Bottom Fade -->
+        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-platinum-900 to-transparent pointer-events-none"></div>
+    </div>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 md:py-32 relative overflow-hidden bg-[#081522]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+            <div class="grid md:grid-cols-12 gap-12 items-center">
+                <div class="md:col-span-5 relative">
+                    <div class="absolute -inset-4 bg-electric-500/10 blur-xl rounded-full"></div>
+                    <div class="relative bg-platinum-900 border border-platinum-300/10 p-6 md:p-8 rounded-sm shadow-2xl">
+                        <div class="space-y-4 font-mono text-xs md:text-sm text-platinum-300/80">
+                            <div class="flex items-center gap-3 border-b border-platinum-300/5 pb-2">
+                                <span class="text-electric-500">&gt;</span> Initializing Kernel optimization...
+                            </div>
+                            <div class="flex items-center gap-3 border-b border-platinum-300/5 pb-2">
+                                <span class="text-electric-500">&gt;</span> Calibrating CPU thread affinity...
+                            </div>
+                            <div class="flex items-center gap-3 border-b border-platinum-300/5 pb-2">
+                                <span class="text-electric-500">&gt;</span> Reducing IRQ latency...
+                            </div>
+                            <div class="flex items-center gap-3 text-electric-500">
+                                <span class="animate-pulse">_</span> System Ready
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-7">
+                    <h2 class="text-2xl md:text-4xl font-serif font-semibold mb-6" data-i18n="about.title">What is Platinum+</h2>
+                    <div class="w-20 h-1 bg-electric-500 mb-8"></div>
+                    <p class="text-platinum-300 text-base md:text-lg leading-relaxed mb-6" data-i18n="about.description1">Description 1</p>
+                    <p class="text-platinum-300 text-base md:text-lg leading-relaxed" data-i18n="about.description2">Description 2</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Audience -->
+    <section id="target" class="py-16 md:py-32 relative overflow-hidden bg-platinum-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-2xl md:text-4xl font-serif font-semibold mb-4" data-i18n="target.title">For Whom</h2>
+                <div class="w-12 h-1 bg-electric-500 mx-auto"></div>
+            </div>
+            <!-- Dynamic Grid injected by JS -->
+            <div id="target-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section id="benefits" class="py-16 md:py-32 relative overflow-hidden bg-[#081522]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-2xl md:text-4xl font-serif font-semibold mb-4" data-i18n="benefits.title">Benefits</h2>
+                </div>
+                <div class="bg-platinum-900 border border-platinum-300/10 p-6 md:p-12 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-electric-500/5 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
+                    <ul id="benefits-list" class="space-y-6 relative z-10"></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security -->
+    <section id="security" class="py-16 md:py-32 relative overflow-hidden bg-platinum-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+            <div class="bg-gradient-to-br from-[#0E1F33] to-[#0B1C2D] border border-platinum-300/10 p-6 md:p-16 rounded-sm relative overflow-hidden">
+                <div class="flex flex-col md:flex-row items-center gap-10">
+                    <div class="flex-shrink-0">
+                        <div class="w-20 h-20 md:w-24 md:h-24 bg-electric-500/10 rounded-full flex items-center justify-center border border-electric-500/20">
+                            <i data-lucide="shield" class="text-electric-500 w-8 h-8 md:w-10 md:h-10"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-serif font-semibold mb-4 text-platinum-50" data-i18n="security.title">Security</h2>
+                        <p class="text-platinum-300 text-base md:text-lg leading-relaxed" data-i18n="security.content">Content</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VirusTotal -->
+    <section id="virustotal" class="py-16 md:py-32 relative overflow-hidden bg-[#081522]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-2xl md:text-4xl font-serif font-semibold mb-4" data-i18n="virusTotal.title">VirusTotal</h2>
+                <p class="text-platinum-300 text-base md:text-lg max-w-2xl mx-auto" data-i18n="virusTotal.description">Desc</p>
+            </div>
+
+            <!-- Widget -->
+            <div class="mb-12">
+                <div class="w-full max-w-4xl mx-auto px-2 md:px-0">
+                    <div class="rounded-sm overflow-hidden border border-platinum-300/10 shadow-2xl shadow-black/50 bg-[#0B1522] relative group hover:border-electric-500/30 transition-colors duration-300">
+                        <a href="https://www.virustotal.com/gui/file/40bd9a337e4e1896c54fd57847a1de7176d588b6ac42bab7c02df6b07d666505" target="_blank" rel="noopener noreferrer" class="block relative cursor-pointer">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#0B1522]/30 to-transparent pointer-events-none transition-opacity duration-500 group-hover:opacity-0 z-10"></div>
+                            <img src="https://ik.imagekit.io/xsc5vax29/Screenshot_78.png" alt="VirusTotal" class="w-full h-auto object-contain block transition-transform duration-700 group-hover:scale-[1.01]" loading="lazy">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="max-w-4xl mx-auto space-y-8">
+                <!-- False Positive Note -->
+                <div class="bg-electric-500/5 border-l-4 border-electric-500 p-6 rounded-r-sm">
+                    <p class="text-platinum-300 text-sm leading-relaxed">
+                        <strong class="text-electric-500 block mb-2" data-i18n="virusTotal.technicalNote">NOTE:</strong>
+                        <span data-i18n="virusTotal.note">Text</span>
+                    </p>
+                </div>
+                <!-- Giant Disclaimer -->
+                <div class="border-2 border-red-500/50 bg-red-900/10 p-6 md:p-10 rounded-sm relative overflow-hidden group hover:bg-red-900/20 transition-colors">
+                    <div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+                        <i data-lucide="alert-triangle" class="text-red-500 w-[80px] h-[80px] md:w-[120px] md:h-[120px]"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="text-xl md:text-2xl font-bold text-red-500 mb-4 flex items-center gap-3">
+                            <i data-lucide="alert-triangle" class="md:w-7 md:h-7"></i>
+                            <span data-i18n="virusTotal.improperUseTitle">WARNING</span>
+                        </h3>
+                        <p class="text-platinum-50 text-base md:text-lg leading-relaxed font-medium" data-i18n="virusTotal.improperUseText">
+                            Text
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activation Section (Steps & Download) -->
+    <section id="activation" class="py-16 md:py-32 text-center bg-platinum-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-8 relative z-10">
+             <div class="mb-8 inline-block px-4 py-1.5 rounded-full bg-electric-500/10 border border-electric-500/20 text-electric-500 text-sm font-semibold tracking-wide" data-i18n="download.version">Version</div>
+             <h2 class="text-3xl md:text-5xl font-serif font-bold mb-8 text-white px-2 break-words" data-i18n="steps.title">Download & Activation</h2>
+             
+             <div class="bg-[#0B1522] border border-platinum-300/20 rounded-sm p-5 md:p-12 shadow-2xl relative overflow-hidden text-left mx-2 md:mx-0">
+                 <div class="absolute top-0 right-0 w-40 h-40 bg-electric-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                 
+                 <div class="grid md:grid-cols-2 gap-10 md:gap-12">
+                     <!-- Steps List -->
+                     <div class="space-y-8" id="steps-container">
+                         <!-- Steps injected by JS -->
+                     </div>
+    
+                     <!-- Password & Download Box -->
+                     <div class="flex flex-col justify-center space-y-6">
+                        <div class="space-y-4">
+                            <button onclick="handleDownload()" class="w-full inline-flex items-center justify-center px-8 py-4 text-base font-medium rounded-sm bg-electric-500 text-white hover:bg-electric-600 shadow-lg shadow-electric-500/30 transition-all duration-300">
+                                <i data-lucide="download" class="mr-2 w-6 h-6"></i>
+                                <span class="truncate" data-i18n="download.buttonExe">Download</span>
+                            </button>
+                            <div class="text-center text-xs font-mono text-platinum-300/40 break-all px-2">
+                                SHA256: b3d0ec5bbaabe2dc22a14decf9af5bdc1b1280ddad9eade1aeff0ae1aa580a3c
+                            </div>
+                        </div>
+                        
+                        <div class="relative flex py-2 items-center">
+                            <div class="flex-grow border-t border-platinum-300/10"></div>
+                            <span class="flex-shrink-0 mx-4 text-platinum-300/30 text-xs uppercase tracking-widest">Secure Access</span>
+                            <div class="flex-grow border-t border-platinum-300/10"></div>
+                        </div>
+
+                        <!-- Key Box -->
+                        <div class="bg-[#08101a] border border-electric-500/30 p-4 md:p-6 rounded-sm relative group">
+                            <div class="absolute -top-3 left-4 bg-[#08101a] px-2 text-electric-500 text-xs font-bold tracking-widest flex items-center gap-1">
+                                <i data-lucide="key" class="w-3 h-3"></i> ACCESS KEY
+                            </div>
+                            <code class="block font-mono text-green-400 break-all text-sm mb-4 select-all bg-black/30 p-2 rounded border border-white/5" id="access-key-display">
+                                <!-- Password injected here -->
+                            </code>
+                            <button id="copy-btn" onclick="handleCopyPassword()" class="w-full flex items-center justify-center gap-2 bg-platinum-800 hover:bg-platinum-700 text-platinum-300 py-3 rounded-sm transition-colors text-sm font-medium border border-platinum-300/10 active:scale-[0.98]">
+                                <i data-lucide="copy" class="w-4 h-4"></i>
+                                <span data-i18n="download.copyBtn">Copy Password</span>
+                            </button>
+                        </div>
+                     </div>
+                 </div>
+             </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-16 md:py-32 bg-[#081522] relative overflow-hidden">
+        <div class="w-full max-w-7xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl md:text-4xl font-serif font-semibold mb-3 text-white" data-i18n="reviews.title">Community Feedback</h2>
+                <div class="w-20 h-1 bg-electric-500 mx-auto mb-4"></div>
+                <p class="text-platinum-300 text-sm md:text-base" data-i18n="reviews.subtitle">Subtitle</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                
+                <!-- Review Form -->
+                <div class="lg:col-span-5 bg-[#0B1522] border border-platinum-300/10 rounded-sm p-6 md:p-8 shadow-2xl relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-electric-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                    
+                    <!-- Form Content -->
+                    <div id="review-form-container">
+                        <form id="review-form" onsubmit="submitReview(event)" class="space-y-6">
+                            <h3 class="text-xl font-medium text-platinum-50 flex items-center gap-2">
+                                <i data-lucide="message-square" class="text-electric-500"></i>
+                                <span data-i18n="reviews.formTitle">Submit Report</span>
+                            </h3>
+
+                            <!-- Star Rating -->
+                            <div class="flex gap-1 justify-center py-4 bg-black/20 rounded border border-white/5" id="star-rating-container">
+                                <button type="button" class="star-btn p-1 transition-transform hover:scale-110 focus:outline-none" data-value="1"><i data-lucide="star" class="w-7 h-7 text-platinum-300/30"></i></button>
+                                <button type="button" class="star-btn p-1 transition-transform hover:scale-110 focus:outline-none" data-value="2"><i data-lucide="star" class="w-7 h-7 text-platinum-300/30"></i></button>
+                                <button type="button" class="star-btn p-1 transition-transform hover:scale-110 focus:outline-none" data-value="3"><i data-lucide="star" class="w-7 h-7 text-platinum-300/30"></i></button>
+                                <button type="button" class="star-btn p-1 transition-transform hover:scale-110 focus:outline-none" data-value="4"><i data-lucide="star" class="w-7 h-7 text-platinum-300/30"></i></button>
+                                <button type="button" class="star-btn p-1 transition-transform hover:scale-110 focus:outline-none" data-value="5"><i data-lucide="star" class="w-7 h-7 text-platinum-300/30"></i></button>
+                            </div>
+                            <input type="hidden" id="review-rating" value="0">
+
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-platinum-300 uppercase tracking-wider mb-2" data-i18n="reviews.labelName">Name</label>
+                                    <input type="text" required class="w-full bg-[#050a0f] border border-platinum-300/20 text-platinum-50 px-4 py-3 rounded-sm focus:border-electric-500 outline-none transition-all placeholder-white/10" placeholder="e.g. ShadowSlayer99">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-platinum-300 uppercase tracking-wider mb-2" data-i18n="reviews.labelSpecs">System Specs</label>
+                                    <div class="relative">
+                                        <i data-lucide="monitor" class="absolute left-3 top-3.5 text-platinum-300/30 w-4 h-4"></i>
+                                        <input type="text" required class="w-full bg-[#050a0f] border border-platinum-300/20 text-platinum-50 pl-10 pr-4 py-3 rounded-sm focus:border-electric-500 outline-none transition-all placeholder-white/10 font-mono text-sm" placeholder="e.g. Ryzen 5800X3D / RTX 3080">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-platinum-300 uppercase tracking-wider mb-2" data-i18n="reviews.labelReview">Review</label>
+                                    <textarea rows="4" required class="w-full bg-[#050a0f] border border-platinum-300/20 text-platinum-50 px-4 py-3 rounded-sm focus:border-electric-500 outline-none transition-all placeholder-white/10 resize-none" id="review-text-area"></textarea>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="w-full bg-electric-500 text-white hover:bg-electric-600 shadow-lg shadow-electric-500/20 hover:shadow-electric-500/40 py-4 font-medium rounded-sm transition-all" data-i18n="reviews.btnSubmit">Submit</button>
+                        </form>
+                    </div>
+
+                    <!-- Success Message (Hidden by default) -->
+                    <div id="review-success" class="hidden h-full min-h-[400px] flex-col items-center justify-center text-center animate-in fade-in zoom-in-95 duration-500">
+                        <div class="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mb-6 border border-green-500/30">
+                            <i data-lucide="check-circle" class="text-green-500 w-10 h-10"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 tracking-wide">SYSTEM ACKNOWLEDGED</h3>
+                        <p class="text-platinum-300/80 mb-8 max-w-xs mx-auto leading-relaxed" data-i18n="reviews.successMessage">Report Transmitted</p>
+                        <button onclick="resetReviewForm()" class="text-sm text-electric-500 hover:text-white underline underline-offset-4 decoration-electric-500/50">Insert New Entry</button>
+                    </div>
+                </div>
+
+                <!-- Feed Column (Placeholder) -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="flex items-center justify-between border-b border-platinum-300/10 pb-4 mb-6">
+                        <h3 class="text-lg font-medium text-platinum-300 flex items-center gap-2">
+                            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                            <span data-i18n="reviews.recentReports">Latest Reports</span>
+                        </h3>
+                        <span class="text-xs font-mono text-platinum-300/40">LIVE FEED</span>
+                    </div>
+                    
+                    <!-- Empty State -->
+                    <div class="flex flex-col items-center justify-center py-24 border border-dashed border-platinum-300/10 bg-[#08101a]/30 rounded-sm text-platinum-300/30 gap-6">
+                        <div class="relative">
+                            <div class="w-16 h-16 rounded-full border border-platinum-300/10 flex items-center justify-center bg-black/40">
+                                <i data-lucide="activity" class="w-8 h-8 text-platinum-300/20"></i>
+                            </div>
+                            <span class="absolute top-0 right-0 flex h-3 w-3">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-electric-500 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-3 w-3 bg-electric-500"></span>
+                            </span>
+                        </div>
+                        <div class="text-center space-y-1">
+                            <div class="font-mono text-xs uppercase tracking-[0.2em] text-electric-500/50">Awaiting Data Stream</div>
+                            <div class="text-[10px] text-platinum-300/20">System listening for incoming performance reports...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-16 md:py-32 relative overflow-hidden bg-[#081522]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-2xl md:text-4xl font-serif font-semibold mb-4" data-i18n="faq.title">FAQ</h2>
+            </div>
+            <!-- Accordion Container -->
+            <div id="faq-container" class="w-full max-w-3xl mx-auto space-y-4"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#050D15] py-12 border-t border-platinum-300/5">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-platinum-300/60 text-center md:text-left">
+            <div class="flex flex-col gap-2">
+                <span data-i18n="footer.copyright">© 2025</span>
+                <span class="text-xs text-platinum-300/40">Developed by two independent engineers.</span>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-center">
+                <button onclick="openModal('privacy')" class="hover:text-electric-500 transition-colors" data-i18n="footer.privacy">Privacy</button>
+                <button onclick="openModal('disclaimer')" class="hover:text-electric-500 transition-colors" data-i18n="footer.legalDisclaimer">Disclaimer</button>
+                
+                <div class="h-4 w-[1px] bg-platinum-300/20 hidden sm:block"></div>
+                
+                <button onclick="openModal('bugReport')" class="flex items-center gap-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 px-3 py-1.5 rounded-sm border border-transparent hover:border-red-500/20 transition-all">
+                    <i data-lucide="bug" class="w-3.5 h-3.5"></i>
+                    <span data-i18n="bugReport.btnLabel">Report Bug</span>
+                </button>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 mt-8 text-xs text-platinum-300/30 text-center md:text-left leading-relaxed max-w-2xl mx-auto md:mx-0" data-i18n="footer.disclaimer">
+            Disclaimer text
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Legal Modal -->
+    <div id="legal-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('legal')"></div>
+        <div class="relative bg-[#0B1C2D] border border-platinum-300/10 w-full max-w-4xl max-h-[90vh] flex flex-col rounded-sm shadow-2xl animate-in">
+            <div class="flex items-center justify-between p-6 border-b border-platinum-300/10 bg-[#081522]">
+                <h2 id="legal-modal-title" class="text-2xl font-serif font-bold text-white">Title</h2>
+                <button onclick="closeModal('legal')" class="p-2 text-platinum-300 hover:text-white hover:bg-white/10 rounded-full"><i data-lucide="x"></i></button>
+            </div>
+            <div id="legal-modal-content" class="overflow-y-auto p-6 md:p-10 space-y-6 text-platinum-300 font-light leading-relaxed whitespace-pre-line"></div>
+            <div class="p-6 border-t border-platinum-300/10 bg-[#081522] flex justify-end">
+                <button onclick="closeModal('legal')" class="px-6 py-2 bg-electric-500 text-white rounded-sm hover:bg-electric-600 transition-colors" data-i18n="footer.closeBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bug Report Modal -->
+    <div id="bug-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="closeModal('bugReport')"></div>
+        <div class="relative bg-[#050a0f] border border-red-500/20 w-full max-w-2xl max-h-[90vh] flex flex-col rounded-sm shadow-[0_0_50px_rgba(239,68,68,0.1)] overflow-hidden">
+             <div class="flex items-center justify-between p-4 md:p-6 border-b border-red-500/10 bg-[#081522]">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-red-500/10 rounded-sm border border-red-500/30 flex items-center justify-center">
+                        <i data-lucide="bug" class="text-red-500"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-mono font-bold text-white tracking-tight flex items-center gap-2">
+                             <span data-i18n="bugReport.modalTitle">Console</span>
+                             <span class="text-[10px] bg-red-900/30 text-red-400 px-1.5 py-0.5 rounded border border-red-500/20">BETA</span>
+                        </h2>
+                        <p class="text-xs text-platinum-300/50 uppercase tracking-wider" data-i18n="bugReport.subtitle">Subtitle</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('bugReport')" class="p-2 text-platinum-300 hover:text-white hover:bg-white/10 rounded-full"><i data-lucide="x"></i></button>
+             </div>
+             <div class="overflow-y-auto p-6 md:p-8 custom-scrollbar">
+                <form id="bug-form" onsubmit="submitBugReport(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                             <label class="text-xs font-bold text-platinum-300 uppercase tracking-wider flex items-center gap-2">
+                                <i data-lucide="terminal" class="text-electric-500 w-3 h-3"></i> <span data-i18n="bugReport.fields.type">Type</span>
+                             </label>
+                             <select id="bug-type" class="w-full bg-[#0B1522] border border-platinum-300/20 text-platinum-50 px-4 py-3 rounded-sm focus:border-red-500 outline-none"></select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-platinum-300 uppercase tracking-wider flex items-center gap-2">
+                               <i data-lucide="alert-octagon" class="text-red-500 w-3 h-3"></i> <span data-i18n="bugReport.fields.severity">Severity</span>
+                            </label>
+                            <select id="bug-severity" class="w-full bg-[#0B1522] border border-platinum-300/20 text-platinum-50 px-4 py-3 rounded-sm focus:border-red-500 outline-none"></select>
+                       </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-platinum-300 uppercase tracking-wider" data-i18n="bugReport.fields.desc">Details</label>
+                        <textarea id="bug-desc" required rows="5" class="w-full bg-[#0B1522] border border-platinum-300/20 text-platinum-50 px-4 py-3 rounded-sm focus:border-red-500 outline-none resize-none font-mono text-sm"></textarea>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-platinum-300 uppercase tracking-wider" data-i18n="bugReport.fields.email">Email</label>
+                        <input id="bug-email" type="email" class="w-full bg-[#0B1522] border border-platinum-300/20 text-platinum-50 px-4 py-3 rounded-sm focus:border-red-500 outline-none">
+                    </div>
+                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 shadow-red-500/20 hover:shadow-red-500/40 py-4 font-medium text-white rounded-sm transition-all" data-i18n="bugReport.submit">Submit</button>
+                </form>
+             </div>
+             <div class="bg-[#020508] p-2 px-4 flex justify-between items-center text-[10px] text-platinum-300/30 font-mono border-t border-platinum-300/5">
+                <span>PLATINUM_DEBUG_TOOL_V1.2</span>
+                <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> SERVER_ONLINE</span>
+             </div>
+        </div>
+    </div>
+
+    <!-- Application Scripts -->
+    <script src="js/content.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
